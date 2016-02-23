@@ -16,7 +16,7 @@ public class SearchController {
 
     @Autowired
     TwitterLookupService twitter;
-
+   
     @RequestMapping("/search")
     public SearchResults search(@RequestParam("q") String q) {
     	return twitter.search(q);
