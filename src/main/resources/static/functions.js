@@ -2,11 +2,19 @@ $(document).ready(function() {
 	registerSearch();
 });
 
+
 function registerSearch() {
 	$("#search").submit(function(ev){
 		event.preventDefault();
-		$.get($(this).attr('action'), {q: $("#q").val()}, function(data) {
-			$("#resultsBlock").empty().append(data);
+		$.getJSON(window.location.href + "search", {q: $("#q").val()}, function(dat) {
+			var json = JSON.stringify(dat);
+			console.log(json);
+			$.get(window.location.href + '/tweetTemplate.html', function(data) {
+				  var template = data;
+				  console.log(data);
+				  var html = Mustache.to_html(template, dat);
+				  $("#resultsBlock").empty().append(html);
+			});
 		});	
 	});
 }
